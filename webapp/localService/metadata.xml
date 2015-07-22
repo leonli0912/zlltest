@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0"
+    xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+    xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+    xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="Z_CYCLE_DISPLAY_SRV" xml:lang="en" sap:schema-version="1"
+            xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="z_cycle_txt" Abstract="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="CbArea"/>
+                    <PropertyRef Name="CycleId"/>
+                </Key>
+                <Property Name="CbArea" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="CB Area" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CycleId" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Cycle ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Langu" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Language" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CycleName" Type="Edm.String" Nullable="false" MaxLength="25" sap:label="Cycle Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CycleDesp" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Cash Budget Cycle Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="z_cycle_list" Abstract="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="CbArea"/>
+                    <PropertyRef Name="CycleId"/>
+                </Key>
+                <Property Name="CbArea" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="CB Area" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CbAreaTxt" Type="Edm.String" Nullable="false" MaxLength="25" sap:label="CB Area Desc" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CycleId" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Cycle ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CycleType" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Cycle Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CycleTypeDesc" Type="Edm.String" Nullable="false" MaxLength="25" sap:label="Cycle Type Desc" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CycleName" Type="Edm.String" Nullable="false" MaxLength="25" sap:label="Cycle Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="z_cycle_nav" Relationship="Z_CYCLE_DISPLAY_SRV.z_cycle_asso" FromRole="FromRole_z_cycle_asso" ToRole="ToRole_z_cycle_asso"/>
+            </EntityType>
+            <Association Name="z_cycle_asso" sap:content-version="1">
+                <End Type="Z_CYCLE_DISPLAY_SRV.z_cycle_list" Multiplicity="1" Role="FromRole_z_cycle_asso"/>
+                <End Type="Z_CYCLE_DISPLAY_SRV.z_cycle_txt" Multiplicity="1" Role="ToRole_z_cycle_asso"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_z_cycle_asso">
+                        <PropertyRef Name="CbArea"/>
+                        <PropertyRef Name="CycleId"/>
+                    </Principal>
+                    <Dependent Role="ToRole_z_cycle_asso">
+                        <PropertyRef Name="CbArea"/>
+                        <PropertyRef Name="CycleId"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="Z_CYCLE_DISPLAY_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json">
+                <EntitySet Name="z_cycle_txtSet" EntityType="Z_CYCLE_DISPLAY_SRV.z_cycle_txt" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="z_cycle_listSet" EntityType="Z_CYCLE_DISPLAY_SRV.z_cycle_list" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <AssociationSet Name="z_cycle_assoSet" Association="Z_CYCLE_DISPLAY_SRV.z_cycle_asso" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="z_cycle_listSet" Role="FromRole_z_cycle_asso"/>
+                    <End EntitySet="z_cycle_txtSet" Role="ToRole_z_cycle_asso"/>
+                </AssociationSet>
+            </EntityContainer>
+            <atom:link rel="self" href="https://rde-fiori.dispatcher.neo.ondemand.com/destinations/UXECLNT902/sap/opu/odata/sap/Z_CYCLE_DISPLAY_SRV/$metadata"
+                xmlns:atom="http://www.w3.org/2005/Atom"/>
+                <atom:link rel="latest-version" href="https://rde-fiori.dispatcher.neo.ondemand.com/destinations/UXECLNT902/sap/opu/odata/sap/Z_CYCLE_DISPLAY_SRV/$metadata"
+                    xmlns:atom="http://www.w3.org/2005/Atom"/>
+                </Schema>
+            </edmx:DataServices>
+        </edmx:Edmx>
