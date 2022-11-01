@@ -1,0 +1,201 @@
+kind: Shoot
+apiVersion: core.gardener.cloud/v1beta1
+metadata:
+  name: xx0luvu5ep
+  namespace: garden-flight
+  uid: db78fd59-0b4b-421a-a46f-7a4d6b587879
+  resourceVersion: '3735650676'
+  generation: 3
+  creationTimestamp: '2022-11-01T13:56:11Z'
+  labels:
+    extensions.extensions.gardener.cloud/shoot-cert-service: 'true'
+    extensions.extensions.gardener.cloud/shoot-dns-service: 'true'
+    extensions.extensions.gardener.cloud/shoot-networking-filter: 'true'
+    networking.extensions.gardener.cloud/calico: 'true'
+    operatingsystemconfig.extensions.gardener.cloud/gardenlinux: 'true'
+    provider.extensions.gardener.cloud/aws: 'true'
+    shoot.gardener.cloud/status: healthy
+  annotations:
+    gardener.cloud/created-by: leon.li02@sap.com
+    shoot.gardener.cloud/expiration-timestamp: '2022-11-08T13:56:11Z'
+  finalizers:
+    - gardener
+spec:
+  addons:
+    kubernetesDashboard:
+      enabled: false
+      authenticationMode: token
+    nginxIngress:
+      enabled: false
+      externalTrafficPolicy: Cluster
+  cloudProfileName: aws
+  dns:
+    domain: xx0luvu5ep.flight.shoot.canary.k8s-hana.ondemand.com
+  extensions:
+    - type: shoot-dns-service
+      providerConfig:
+        apiVersion: service.dns.extensions.gardener.cloud/v1alpha1
+        kind: DNSConfig
+        syncProvidersFromShootSpecDNS: true
+  hibernation:
+    schedules:
+      - start: 00 17 * * 1,2,3,4,5
+        location: Asia/Shanghai
+  kubernetes:
+    allowPrivilegedContainers: true
+    kubeAPIServer:
+      enableBasicAuthentication: false
+      requests:
+        maxNonMutatingInflight: 400
+        maxMutatingInflight: 200
+      enableAnonymousAuthentication: false
+      eventTTL: 1h0m0s
+    kubeControllerManager:
+      nodeCIDRMaskSize: 24
+      podEvictionTimeout: 2m0s
+      nodeMonitorGracePeriod: 2m0s
+    kubeScheduler:
+      profile: balanced
+    kubeProxy:
+      mode: IPTables
+      enabled: true
+    kubelet:
+      failSwapOn: true
+      kubeReserved:
+        cpu: 80m
+        memory: 1Gi
+        pid: 20k
+      imageGCHighThresholdPercent: 50
+      imageGCLowThresholdPercent: 40
+      serializeImagePulls: true
+    version: 1.24.6
+    verticalPodAutoscaler:
+      enabled: true
+      evictAfterOOMThreshold: 10m0s
+      evictionRateBurst: 1
+      evictionRateLimit: -1
+      evictionTolerance: 0.5
+      recommendationMarginFraction: 0.15
+      updaterInterval: 1m0s
+      recommenderInterval: 1m0s
+    enableStaticTokenKubeconfig: false
+  networking:
+    type: calico
+    pods: 100.64.0.0/12
+    nodes: 10.180.0.0/16
+    services: 100.104.0.0/13
+  maintenance:
+    autoUpdate:
+      kubernetesVersion: true
+      machineImageVersion: true
+    timeWindow:
+      begin: 050000+0800
+      end: 060000+0800
+  provider:
+    type: aws
+    controlPlaneConfig:
+      apiVersion: aws.provider.extensions.gardener.cloud/v1alpha1
+      kind: ControlPlaneConfig
+    infrastructureConfig:
+      apiVersion: aws.provider.extensions.gardener.cloud/v1alpha1
+      kind: InfrastructureConfig
+      networks:
+        vpc:
+          cidr: 10.180.0.0/16
+        zones:
+          - name: eu-central-1a
+            workers: 10.180.0.0/19
+            public: 10.180.32.0/20
+            internal: 10.180.48.0/20
+    workers:
+      - cri:
+          name: containerd
+        name: worker-t4mnv
+        machine:
+          type: m5.large
+          image:
+            name: gardenlinux
+            version: 576.12.0
+          architecture: amd64
+        maximum: 2
+        minimum: 1
+        maxSurge: 1
+        maxUnavailable: 0
+        volume:
+          type: gp3
+          size: 50Gi
+        zones:
+          - eu-central-1a
+        systemComponents:
+          allow: true
+  purpose: evaluation
+  region: eu-central-1
+  secretBindingName: trial-secretbinding-aws
+  seedName: aws-eu4
+  systemComponents:
+    coreDNS:
+      autoscaling:
+        mode: horizontal
+    nodeLocalDNS:
+      enabled: true
+status:
+  conditions:
+    - type: APIServerAvailable
+      status: 'True'
+      lastTransitionTime: '2022-11-01T14:03:08Z'
+      lastUpdateTime: '2022-11-01T14:03:08Z'
+      reason: HealthzRequestSucceeded
+      message: API server /healthz endpoint responded with success status code.
+    - type: ControlPlaneHealthy
+      status: 'True'
+      lastTransitionTime: '2022-11-01T14:04:13Z'
+      lastUpdateTime: '2022-11-01T14:04:13Z'
+      reason: ControlPlaneRunning
+      message: All control plane components are healthy.
+    - type: EveryNodeReady
+      status: 'True'
+      lastTransitionTime: '2022-11-01T14:03:08Z'
+      lastUpdateTime: '2022-11-01T14:03:08Z'
+      reason: EveryNodeReady
+      message: All nodes are ready.
+    - type: SystemComponentsHealthy
+      status: 'True'
+      lastTransitionTime: '2022-11-01T14:05:13Z'
+      lastUpdateTime: '2022-11-01T14:05:13Z'
+      reason: SystemComponentsRunning
+      message: All system components are healthy.
+  constraints:
+    - type: HibernationPossible
+      status: 'True'
+      lastTransitionTime: '2022-11-01T14:03:08Z'
+      lastUpdateTime: '2022-11-01T14:01:12Z'
+      reason: NoProblematicWebhooks
+      message: All webhooks are properly configured.
+    - type: MaintenancePreconditionsSatisfied
+      status: 'True'
+      lastTransitionTime: '2022-11-01T14:03:08Z'
+      lastUpdateTime: '2022-11-01T14:01:12Z'
+      reason: NoProblematicWebhooks
+      message: All webhooks are properly configured.
+  gardener:
+    id: c0ddbb91760a85a61a6357e981ab3a2f0cdf32a409c6c7431febbbc4d7f66d8e
+    name: gardenlet-77445b7776-rd54r
+    version: v1.58.0
+  hibernated: false
+  lastOperation:
+    description: Shoot cluster has been successfully reconciled.
+    lastUpdateTime: '2022-11-01T14:03:08Z'
+    progress: 100
+    state: Succeeded
+    type: Create
+  observedGeneration: 3
+  seedName: aws-eu4
+  technicalID: shoot--flight--xx0luvu5ep
+  uid: db78fd59-0b4b-421a-a46f-7a4d6b587879
+  clusterIdentity: >-
+    shoot--flight--xx0luvu5ep-db78fd59-0b4b-421a-a46f-7a4d6b587879-sap-landscape-canary
+  advertisedAddresses:
+    - name: external
+      url: https://api.xx0luvu5ep.flight.shoot.canary.k8s-hana.ondemand.com
+    - name: internal
+      url: https://api.xx0luvu5ep.flight.internal.canary.k8s.ondemand.com
