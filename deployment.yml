@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         # Configure the docker image you just pushed to your repository here
-        - image: ly95487532/ui5img:latest
+        - image: ly95487532/ui5demo1:latest
           name: my-app
           imagePullPolicy: Always
           resources:
@@ -43,6 +43,6 @@ metadata:
 spec:
   type: NodePort
   ports:
-    - port: 8080
+    - port: 1336
   selector:
     app: my-app
