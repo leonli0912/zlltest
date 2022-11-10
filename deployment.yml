@@ -41,7 +41,7 @@ metadata:
   name: my-app
   namespace: default
 spec:
-  type: NodePort
+  type: ClusterIP
   ports:
     - port: 1336
   selector:
