@@ -11,11 +11,10 @@ spec:
   controller: k8s.io/ingress-nginx
   tls:
     - hosts:
-      - "qo405mn370.flight.shoot.canary.k8s-hana.ondemand.com"
-      - "*.ingress.qo405mn370.flight.shoot.canary.k8s-hana.ondemand.com"
+      - "a2938f886c5974abb8b6f7ebb624822c-763248032.eu-west-1.elb.amazonaws.com/"
     # secretName: secret-tls
   rules:
-    - host: 'my-app.ingress.qo405mn370.flight.shoot.canary.k8s-hana.ondemand.com'
+    - host: 'my-app.a2938f886c5974abb8b6f7ebb624822c-763248032.eu-west-1.elb.amazonaws.com/'
       http:
         paths:
           - path: /
