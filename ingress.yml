@@ -9,11 +9,11 @@ metadata:
 spec:
   tls:
     - hosts:
-      - "xx0luvu5ep.flight.shoot.canary.k8s-hana.ondemand.com"
-      - "*.ingress.xx0luvu5ep.flight.shoot.canary.k8s-hana.ondemand.com"
+      - "qo405mn370.flight.shoot.canary.k8s-hana.ondemand.com"
+      - "*.ingress.qo405mn370.flight.shoot.canary.k8s-hana.ondemand.com"
     # secretName: secret-tls
   rules:
-    - host: 'my-app.ingress.xx0luvu5ep.flight.shoot.canary.k8s-hana.ondemand.com'
+    - host: 'my-app.ingress.qo405mn370.flight.shoot.canary.k8s-hana.ondemand.com'
       http:
         paths:
           - path: /
