@@ -5,8 +5,10 @@ metadata:
   name: ingress-router
   namespace: default
   annotations:
+    ingressclass.kubernetes.io/is-default-class: "true"
   # cert.gardener.cloud/purpose: managed
 spec:
+  controller: k8s.io/ingress-nginx
   tls:
     - hosts:
       - "qo405mn370.flight.shoot.canary.k8s-hana.ondemand.com"
