@@ -2,11 +2,10 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ingress-router2
+  name: ingress-router
   namespace: default
   annotations:
     ingressclass.kubernetes.io/is-default-class: "true"
-    nginx.ingress.kubernetes.io/rewrite-target: /
   # cert.gardener.cloud/purpose: managed
 spec:
   ingressClassName: nginx
@@ -18,7 +17,7 @@ spec:
     - host: 'a2938f886c5974abb8b6f7ebb624822c-763248032.eu-west-1.elb.amazonaws.com'
       http:
         paths:
-          - path: /app
+          - path: /
             pathType: Prefix
             backend:
               service:
