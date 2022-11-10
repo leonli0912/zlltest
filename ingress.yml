@@ -6,9 +6,10 @@ metadata:
   namespace: default
   annotations:
     ingressclass.kubernetes.io/is-default-class: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /
   # cert.gardener.cloud/purpose: managed
 spec:
-  controller: k8s.io/ingress-nginx
+  ingressClassName: nginx
   tls:
     - hosts:
       - "a2938f886c5974abb8b6f7ebb624822c-763248032.eu-west-1.elb.amazonaws.com"
