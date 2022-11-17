@@ -11,10 +11,10 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-      - "a2938f886c5974abb8b6f7ebb624822c-763248032.eu-west-1.elb.amazonaws.com"
+      - "a8b1b956f543f4cd8ba392e6ddd34cb4-200992748.eu-central-1.elb.amazonaws.com"
     # secretName: secret-tls
   rules:
-    - host: 'a2938f886c5974abb8b6f7ebb624822c-763248032.eu-west-1.elb.amazonaws.com'
+    - host: 'a8b1b956f543f4cd8ba392e6ddd34cb4-200992748.eu-central-1.elb.amazonaws.com'
       http:
         paths:
           - path: /
