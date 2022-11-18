@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-ui5-deployment
+  name: my-realignment-deployment
 spec:
   replicas: 1
   selector:
@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         # Configure the docker image you just pushed to your repository here
-        - image: jeremywu468/realignment_v0.1:latest
+        - image: ly95487532/realignment:latest
           name: realignment
           imagePullPolicy: Always
           resources:
@@ -27,9 +27,9 @@ spec:
               cpu: '750m'
           # Volume mounts needed for injecting BTP service credentials
           volumeMounts:
-      # imagePullSecrets:
+       imagePullSecrets:
         # In case your repository requires a login, reference your secret here
-        # - name: ly880912
+         - name: ly880912
       # Volumes containing BTP serice credentials from secrets
       volumes:
 ---
@@ -43,6 +43,6 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-    - port: 1336
+    - port: 8080
   selector:
     app: realignment
