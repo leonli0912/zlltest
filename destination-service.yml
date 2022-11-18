@@ -1,0 +1,17 @@
+---
+apiVersion: services.cloud.sap.com/v1
+kind: ServiceInstance
+metadata:
+  name: destination-service
+spec:
+  serviceOfferingName: destination
+  servicePlanName: lite
+  externalName: default-destination-service
+---
+apiVersion: services.cloud.sap.com/v1
+kind: ServiceBinding
+metadata:
+  name: my-destination-service-binding
+spec:
+  serviceInstanceName: destination-service
+  secretName: my-destination-service-secret
