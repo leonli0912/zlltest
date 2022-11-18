@@ -6,18 +6,19 @@ metadata:
   namespace: default
   annotations:
     ingressclass.kubernetes.io/is-default-class: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /
   # cert.gardener.cloud/purpose: managed
 spec:
   ingressClassName: nginx
   tls:
     - hosts:
-      - "a8b1b956f543f4cd8ba392e6ddd34cb4-200992748.eu-central-1.elb.amazonaws.com"
+      - "a02beb55a6d4949e28556c0234df4f1c-1908183393.eu-central-1.elb.amazonaws.com"
     # secretName: secret-tls
   rules:
-    - host: 'a8b1b956f543f4cd8ba392e6ddd34cb4-200992748.eu-central-1.elb.amazonaws.com'
+    - host: 'a02beb55a6d4949e28556c0234df4f1c-1908183393.eu-central-1.elb.amazonaws.com'
       http:
         paths:
-          - path: /
+          - path: /my-app/
             pathType: Prefix
             backend:
               service:
