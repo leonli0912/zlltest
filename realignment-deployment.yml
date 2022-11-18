@@ -27,7 +27,7 @@ spec:
               cpu: '750m'
           # Volume mounts needed for injecting BTP service credentials
           volumeMounts:
-        imagePullSecrets:
+      imagePullSecrets:
         # In case your repository requires a login, reference your secret here
         - name: ly880912
       # Volumes containing BTP serice credentials from secrets
