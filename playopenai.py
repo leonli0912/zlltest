@@ -2,7 +2,7 @@ import openai
 import ssl
 ssl.match_hostname = lambda cert, hostname: True
 
-openai.api_key = "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"
+openai.api_key = "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"
 
 # Define your prompt and parameters
 prompt = "Hello, how are you?"
